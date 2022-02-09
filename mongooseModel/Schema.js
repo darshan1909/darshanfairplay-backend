@@ -26,3 +26,4 @@ var schema = new mongoose.Schema({
 });
 
 export default mongoose.model("login_details", schema);
+// let login_details = module.exports = mongoose.model("login_details",schema);

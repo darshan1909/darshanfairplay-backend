@@ -5,6 +5,15 @@ import bodyParser from "body-parser";
 import { check, validationResult } from "express-validator";
 import mongoose from "mongoose";
 import "dotenv/config";
+import cors from "cors";
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+
 
 app.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -49,13 +58,14 @@ app.post(
     } else {
       try {
         let user = await Model.saveData(req.body);
-        if (user.isEmpty()) {
+        if (user.length === 0) {
           res.status(204).send([]);
         } else {
           res.status(201).send(user);
         }
       } catch (error) {
         res.status(500).send(error);
+        console.log(error)
       }
     }
   }
