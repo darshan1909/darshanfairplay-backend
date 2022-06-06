@@ -8,6 +8,7 @@ export default {
 
   login: async (data) => {
     let user = await Schema.find({ email: data.email });
+    console.log(">>>>",user)
     if (Object.keys(user).length === 0) {
       return 0;
     } else {
